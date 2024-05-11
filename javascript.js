@@ -142,7 +142,6 @@ form.addEventListener("submit", (event) => {
     } else if (password.value !== passwordCon.value) {
         showErrorConPassword();
         event.preventDefault();
-      //  event.stopPropagation();
     } else {
         alert("high five!"); 
     }

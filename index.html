@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Validation with JavaScript</title>
+        <link rel="stylesheet" href="style.css" >
+    </head>
+    <body>
+        <script src="javascript.js" defer></script>
+
+        <form novalidate action="">
+            <fieldset>
+                <p> 
+                    <label for="email">Email: 
+                        <input type="email" id="email" name="Email" placeholder="lucia@gmail.com" minlength="7" required />
+                        <span class="error" aria-live="polite"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="country">Country: 
+                        <input type="text" id="country" name="Country" placeholder="Nigeria, Sweden, ..." minlength="2" required />
+                        <span class="error" aria-live="polite"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="zipC">Zip Code: 
+                        <input type="text" id="zipC" name="Zip Code" placeholder="00012 " minlength="2" required />
+                        <span class="error" aria-live="polite"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="passWord">Password: 
+                        <input type="password" id="passWord" name="Password" minlength="6" 
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*" required />
+                        <span class="error" aria-live="polite"></span>
+                    </label>
+                </p>
+
+                <p>
+                    <label for="passwordCon">Confirm Password: 
+                        <input type="password" id="passwordCon" name="Password Confirmation" required />
+                        <span class="error" aria-live="polite"></span>
+                    </label>
+                </p>
+
+                <button id="subm">Submit</button>
+
+
+            </fieldset>
+
+
+        </form>
+
+        <script>
+
+            function showErrorConPassword() {
+                const password = document.getElementById("passWord");
+        
+                const passwordCon = document.getElementById("passwordCon");
+                const passConError = document.querySelector("#passWordCon + span.error");
+                const pVal = password.value;
+                const pVal2 = passwordCon.value
+                if ( pVal2 !== pVal ) {
+                    passwordCon.setCustomValidity("password mismatch!");
+                    passConError.textContent = "password mismatch!";
+                    return;
+                } 
+                passwordCon.setCustomValidity("");
+                passConError.textContent = "";
+                passConError.className = "error";
+            }
+
+            window.onload = () => {
+                passwordCon = document.getElementById("passwordCon").onchange = showErrorConPassword;
+            };
+        </script>
+        
+    </body>
+</html>

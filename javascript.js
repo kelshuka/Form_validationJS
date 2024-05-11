@@ -14,7 +14,7 @@ const password = document.getElementById("passWord");
 const passwordError = document.querySelector("#passWord + span.error");
 
 const passwordCon = document.getElementById("passwordCon");
-const passConError = document.querySelector("#passWordCon + span.error");
+const passConError = document.querySelector("#passwordCon + span.error");
 
 
 function showErrorEmail() {
@@ -105,25 +105,25 @@ password.addEventListener("input", (event) => {
     }
 });
 
+function showErrorConPassword() {
+    if (passwordCon.validity.valueMissing) {
+        passConError.textContent = "Please confirm the password.";
+        passConError.className = "error active";
+    } else if (password.value !== passwordCon.value) {
+        passwordCon.setCustomValidity("password mismatch!");
+        passConError.textContent = "password mismatch!";
+        console.log(passConError);
+        passConError.className = "error active";
+    } else {
+        passwordCon.setCustomValidity("");
+        passConError.textContent = "";
+        passConError.className = "error";
+    }
+}
 
-//function showErrorConPassword() {
-//    if (passwordCon.validity.valueMissing) {
-//        passConError.textContent = "Please confirm the password.";
-//        passConError.className = "error active";
- //   } else if (password.value !== passwordCon.value) {
- //       passwordCon.setCustomValidity("password mismatch!");
- //       passConError.textContent = "password mismatch!";
- //       passConError.className = "error active";
- //   } else {
- //       passwordCon.setCustomValidity("");
- //       passConError.textContent = "";
- //       passConError.className = "error";
- //   }
-//}
-
-//passwordCon.addEventListener("input", (event) => {
- //   showErrorConPassword();    
-//});
+passwordCon.addEventListener("input", (event) => {
+    showErrorConPassword();    
+});
 
 
 form.addEventListener("submit", (event) => {
@@ -139,9 +139,12 @@ form.addEventListener("submit", (event) => {
     } else if (!password.validity.valid) {
         showErrorPassword();
         event.preventDefault();
-    } //else if (password.value !== passwordCon.value) {
-      //  showErrorConPassword();
-      //  event.preventDefault();
+    } else if (password.value !== passwordCon.value) {
+        showErrorConPassword();
+        event.preventDefault();
       //  event.stopPropagation();
-    //} 
+    } else {
+        alert("high five!"); 
+    }
+    
 });
